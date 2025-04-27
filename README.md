@@ -36,6 +36,8 @@ Work Flow of our model
 
 https://github.com/user-attachments/assets/5c0da3cd-3ee6-440a-89cb-b8b44e7d1c80
 
+link to our presentation:-
+https://app.presentations.ai/view/tkGSK3
 
 
 
