@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Emotional Companion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+  <h1> Emotional Companion </h1>
+
+  <label for="name">Name</label>
+  <input type="text" id="name" placeholder="Enter your name"/>
+
+  <label for="age">Age</label>
+  <input type="number" id="age" placeholder="Enter your age"/>
+
+  <label for="gender">Gender</label>
+  <select id="gender">
+    <option value="">Select gender…</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+  </select>
+
+  <button id="mic-btn" aria-pressed="false" aria-label="Activate microphone">
+    🎤
+  </button>
+
+  <div id="bot-response" class="bot-response"></div>
+</div>
+
+<script>
+  const micBtn      = document.getElementById('mic-btn');
+  const responseDiv = document.getElementById('bot-response');
+
+  function disableMic() {
+    micBtn.classList.remove('active');
+    micBtn.setAttribute('aria-pressed', 'false');
+    micBtn.setAttribute('aria-label', 'Activate microphone');
+  }
+
+  micBtn.addEventListener('click', async () => {
+    // Toggle button on/off
+    const isOn = micBtn.classList.toggle('active');
+    micBtn.setAttribute('aria-pressed', isOn);
+    micBtn.setAttribute('aria-label', isOn ? 'Deactivate microphone' : 'Activate microphone');
+
+    if (!isOn) {
+      responseDiv.textContent = '';
+      return;
+    }
+
+    responseDiv.textContent = 'Listening…';
+    try {
+      const res  = await fetch('/process_speech');
+      const obj  = await res.json();
+      const { en, hi, audio_data } = obj;
+
+      // 1) Show English text
+      responseDiv.textContent = 'Bot (EN): ' + en;
+
+      // 2) Play Hindi audio from base64
+      const audio = new Audio('data:audio/mp3;base64,' + audio_data);
+      audio.play();
+      audio.onended = () => {
+        disableMic();
+      };
+
+    } catch (err) {
+      console.error(err);
+      responseDiv.textContent = 'Error processing your speech.';
+      disableMic();
+    }
+  });
+</script>
+
+</body>
+</html>

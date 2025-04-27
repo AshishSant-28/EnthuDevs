@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #6a11cb;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #333;
+  display: block;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #f9f9f9;
+}
+
+input:focus, select:focus {
+  border-color: #6a11cb;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+}
+
+#mic-btn {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 2rem auto 0;
+  font-size: 2rem;
+  line-height: 1;
+  background: #e0e0e0;
+  color: #555;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.1s;
+}
+
+#mic-btn.active {
+  background: #6a11cb;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+#mic-btn:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(106, 17, 203, 0.7);
+}
+
+.bot-response {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f0f0f0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: #333;
+  min-height: 50px;
+}
